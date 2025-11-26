@@ -1,120 +1,172 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>کارت پستال عاشقانه</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>کارت پستال عاشقانه</title>
+    <style>
+      body {
+        font-family: "Vazirmatn", sans-serif;
+        background: linear-gradient(135deg, #ffdee9, #b5fffc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
 
-  <style>
-    body {
-      font-family: "Vazirmatn", sans-serif;
-      background: linear-gradient(135deg, #ffdee9, #b5fffc);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
+      .card {
+        background: linear-gradient(135deg, #ffffff, #fff6f9);
+        padding: 25px;
+        border-radius: 20px;
+        width: 480px;
+        box-shadow: 0 0 25px rgba(255, 0, 128, 0.15);
+        border: 1px solid #ffe0ef;
+      }
 
-    .card {
-      background: linear-gradient(135deg, #ffffff, #fff6f9);
-      padding: 25px;
-      border-radius: 20px;
-      width: 480px;
-      box-shadow: 0 0 25px rgba(255, 0, 128, 0.15);
-      border: 1px solid #ffe0ef;
-    }
+      .love-text {
+        background: #fff0f6;
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        border: 1px solid #ffc8dd;
+        color: #c9184a;
+        font-weight: 600;
+      }
 
-    .love-text {
-      background: #fff0f6;
-      border-radius: 12px;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
-      line-height: 1.8;
-      margin-bottom: 20px;
-      border: 1px solid #ffc8dd;
-      color: #c9184a;
-      font-weight: 600;
-    }
+      audio {
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 10px;
+      }
 
-    audio {
-      width: 100%;
-      margin-bottom: 15px;
-      border-radius: 10px;
-    }
+      .info-box {
+        background: #ffffff;
+        padding: 12px 15px;
+        border-radius: 12px;
+        border: 1px solid #f3d1e0;
+        margin-top: 10px;
+        font-size: 15px;
+        color: #4b4453;
+      }
 
-    .info-box {
-      background: #ffffff;
-      padding: 12px 15px;
-      border-radius: 12px;
-      border: 1px solid #f3d1e0;
-      margin-top: 10px;
-      font-size: 15px;
-      color: #4b4453;
-    }
+      .label {
+        font-weight: bold;
+        color: #ff006e;
+      }
 
-    .label {
-      font-weight: bold;
-      color: #ff006e;
-    }
+      .value {
+        color: #5a189a;
+      }
 
-    .value {
-      color: #5a189a;
-    }
-  </style>
+      .heart-drop {
+        position: fixed;
+        top: -20px;
+        font-size: 22px;
+        color: red;
+        animation: fall linear forwards;
+        z-index: 9999;
+      }
 
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet" />
-</head>
+      @keyframes fall {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(120vh);
+          opacity: 0.7;
+        }
+      }
+    </style>
 
-<body>
-  <div class="card">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-    <div class="love-text">
-      «هر بار که صدای این آهنگ پخش می‌شود  
-      یک‌بار دیگر یادم می‌افتد  
-      چقدر دوستت دارم…»
+  <body>
+    <div class="card">
+      <div class="love-text">
+        «هر بار که صدای این آهنگ پخش می‌شود یک‌بار دیگر یادم می‌افتد چقدر دوستت
+        دارم…»
+      </div>
+
+      <audio
+        id="aud"
+        controls
+        src="https://dls.musics-fa.com/song/alibz/dlswm/Morteza%20Pashaei%20-%20Asheghetam%20(320).mp3"
+      ></audio>
+
+      <div class="info-box">
+        <div>
+          <span class="label">رویداد: </span>
+          <span id="ev" class="value">—</span>
+        </div>
+        <div>
+          <span class="label">ثانیه: </span
+          ><span id="sec" class="value">0</span>
+        </div>
+        <div>
+          <span class="label">دقیقه:ثانیه: </span
+          ><span id="minsec" class="value">0:00</span>
+        </div>
+      </div>
     </div>
 
-    <audio id="aud" controls 
-      src="https://dls.musics-fa.com/song/alibz/dlswm/Morteza%20Pashaei%20-%20Asheghetam%20(320).mp3"></audio>
+    <script>
+      var a = document.getElementById("aud");
+      var ev = document.getElementById("ev");
+      var sec = document.getElementById("sec");
+      var minsec = document.getElementById("minsec");
 
-    <div class="info-box">
-      <div>
-        <span class="label">رویداد: </span>
-        <span id="ev" class="value">—</span>
-      </div>
-      <div>
-        <span class="label">ثانیه: </span><span id="sec" class="value">0</span>
-      </div>
-      <div>
-        <span class="label">دقیقه:ثانیه: </span><span id="minsec" class="value">0:00</span>
-      </div>
-    </div>
-  </div>
+      function format(t) {
+        var m = Math.floor(t / 60);
+        var s = Math.floor(t % 60)
+          .toString()
+          .padStart(2, "0");
+        return m + ":" + s;
+      }
 
-  <script>
-    var a = document.getElementById("aud");
-    var ev = document.getElementById("ev");
-    var sec = document.getElementById("sec");
-    var minsec = document.getElementById("minsec");
+      a.onplay = () => (ev.textContent = "در حال پخش");
+      a.onpause = () => (ev.textContent = "مکث");
+      a.onended = () => (ev.textContent = "اتمام");
+      a.onvolumechange = () => (ev.textContent = "تغییر حجم صدا");
 
-    function format(t) {
-      var m = Math.floor(t / 60);
-      var s = Math.floor(t % 60).toString().padStart(2, "0");
-      return m + ":" + s;
-    }
+      a.ontimeupdate = () => {
+        sec.textContent = Math.floor(a.currentTime);
+        minsec.textContent = format(a.currentTime);
+      };
+    </script>
 
-    a.onplay = () => ev.textContent = "در حال پخش";
-    a.onpause = () => ev.textContent = "مکث";
-    a.onended = () => ev.textContent = "اتمام";
-    a.onvolumechange = () => ev.textContent = "تغییر حجم صدا";
+    <script>
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart-drop";
+        heart.textContent = "❤️";
 
-    a.ontimeupdate = () => {
-      sec.textContent = Math.floor(a.currentTime);
-      minsec.textContent = format(a.currentTime);
-    };
-  </script>
+        // left position
+        heart.style.left = Math.random() * window.innerWidth + "px";
 
-</body>
+        // random size
+        let size = 18 + Math.random() * 12;
+        heart.style.fontSize = size + "px";
+
+        // random speed
+        let duration = 1.5 + Math.random() * 2;
+        heart.style.animationDuration = duration + "s";
+
+        document.body.appendChild(heart);
+
+        // remove after falling
+        setTimeout(() => heart.remove(), duration * 1000);
+      }
+
+      setInterval(createHeart, 120); // بارش متوسط ❤️
+    </script>
+  </body>
 </html>
