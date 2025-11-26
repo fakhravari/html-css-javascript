@@ -9,48 +9,62 @@
   <style>
     body {
       font-family: "Vazirmatn", sans-serif;
-      background: black;
+      background: linear-gradient(135deg, #ffdee9, #b5fffc);
       display: flex;
       justify-content: center;
-      direction: rtl;
-      overflow-x: hidden;
-      overflow-y: hidden;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
     }
 
     .card {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 15px;
+      background: linear-gradient(135deg, #ffffff, #fff6f9);
+      padding: 25px;
+      border-radius: 20px;
       width: 480px;
-      z-index: 10;
-      position: relative;
+      box-shadow: 0 0 25px rgba(255, 0, 128, 0.15);
+      border: 1px solid #ffe0ef;
     }
 
-    video {
-      width: 100%;
+    .love-text {
+      background: #fff0f6;
       border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      border: 1px solid #ffc8dd;
+      color: #c9184a;
+      font-weight: 600;
+    }
+
+    audio {
+      width: 100%;
       margin-bottom: 15px;
+      border-radius: 10px;
     }
 
     .info-box {
-      background: #f9fafb;
-      padding: 10px 15px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: 1px solid #f3d1e0;
       margin-top: 10px;
       font-size: 15px;
+      color: #4b4453;
     }
 
     .label {
       font-weight: bold;
-      color: #374151;
+      color: #ff006e;
     }
 
     .value {
-      color: #111827;
+      color: #5a189a;
     }
-
-    /* افکت بارش قلب DOM */
+  </style>
+  <style>
     .heart-drop {
       position: fixed;
       top: -20px;
@@ -78,11 +92,11 @@
 </head>
 
 <body>
-
   <div class="card">
-
     <video poster="https://rozmusic.com/wp-content/uploads/2025/11/Mehdi-Darabi-Zakhme-Kari-Live.jpg" id="vid" controls>
-      <source src="https://dl.rozmusic.com/Music/1404/08/20/Mehdi%20Darabi%20-%20Zakhme%20Kari%20%28Live%29%20480p_RozMusic.mp4" type="video/mp4">
+      <source
+        src="https://dl.rozmusic.com/Music/1404/08/20/Mehdi%20Darabi%20-%20Zakhme%20Kari%20%28Live%29%20480p_RozMusic.mp4"
+        type="video/mp4" />
     </video>
 
     <div class="info-box">
@@ -97,7 +111,6 @@
         <span class="label">دقیقه:ثانیه: </span><span id="minsec" class="value">0:00</span>
       </div>
     </div>
-
   </div>
 
   <script>
@@ -108,7 +121,9 @@
 
     function format(t) {
       var m = Math.floor(t / 60);
-      var s = Math.floor(t % 60).toString().padStart(2, "0");
+      var s = Math.floor(t % 60)
+        .toString()
+        .padStart(2, "0");
       return m + ":" + s;
     }
 
@@ -150,7 +165,6 @@
 
     setInterval(createHeart, 150);
   </script>
-
 </body>
 
 </html>
