@@ -3,45 +3,64 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Audio Event</title>
+  <title>کارت پستال عاشقانه</title>
 
   <style>
     body {
       font-family: "Vazirmatn", sans-serif;
-      background: black;
+      background: linear-gradient(135deg, #ffdee9, #b5fffc);
       display: flex;
       justify-content: center;
-      direction: rtl;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
     }
 
     .card {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 15px;
+      background: linear-gradient(135deg, #ffffff, #fff6f9);
+      padding: 25px;
+      border-radius: 20px;
       width: 480px;
+      box-shadow: 0 0 25px rgba(255, 0, 128, 0.15);
+      border: 1px solid #ffe0ef;
+    }
+
+    .love-text {
+      background: #fff0f6;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      border: 1px solid #ffc8dd;
+      color: #c9184a;
+      font-weight: 600;
     }
 
     audio {
       width: 100%;
       margin-bottom: 15px;
+      border-radius: 10px;
     }
 
     .info-box {
-      background: #f9fafb;
-      padding: 10px 15px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: 1px solid #f3d1e0;
       margin-top: 10px;
       font-size: 15px;
+      color: #4b4453;
     }
 
     .label {
       font-weight: bold;
-      color: #374151;
+      color: #ff006e;
     }
 
     .value {
-      color: #111827;
+      color: #5a189a;
     }
   </style>
 
@@ -50,6 +69,12 @@
 
 <body>
   <div class="card">
+
+    <div class="love-text">
+      «هر بار که صدای این آهنگ پخش می‌شود  
+      یک‌بار دیگر یادم می‌افتد  
+      چقدر دوستت دارم…»
+    </div>
 
     <audio id="aud" controls 
       src="https://dls.musics-fa.com/song/alibz/dlswm/Morteza%20Pashaei%20-%20Asheghetam%20(320).mp3"></audio>
@@ -76,33 +101,20 @@
 
     function format(t) {
       var m = Math.floor(t / 60);
-      var s = Math.floor(t % 60)
-        .toString()
-        .padStart(2, "0");
+      var s = Math.floor(t % 60).toString().padStart(2, "0");
       return m + ":" + s;
     }
 
-    a.onplay = function () {
-      ev.textContent = "درحال پخش";
-    };
+    a.onplay = () => ev.textContent = "در حال پخش";
+    a.onpause = () => ev.textContent = "مکث";
+    a.onended = () => ev.textContent = "اتمام";
+    a.onvolumechange = () => ev.textContent = "تغییر حجم صدا";
 
-    a.onpause = function () {
-      ev.textContent = "مکث";
-    };
-
-    a.onended = function () {
-      ev.textContent = "اتمام";
-    };
-
-    a.ontimeupdate = function () {
+    a.ontimeupdate = () => {
       sec.textContent = Math.floor(a.currentTime);
       minsec.textContent = format(a.currentTime);
     };
-
-    a.onvolumechange = function () {
-      ev.textContent = "تغییر حجم صدا";
-    };
   </script>
-</body>
 
+</body>
 </html>
