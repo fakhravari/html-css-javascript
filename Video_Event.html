@@ -1,104 +1,152 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Video Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Video Event</title>
+    <style>
+      body {
+        font-family: "Vazirmatn", sans-serif;
+        background: black;
+        display: flex;
+        justify-content: center;
+        direction: rtl;
+        overflow-x: hidden;
+        overflow-y: hidden;
+      }
 
-  <style>
-    body {
-      font-family: "Vazirmatn", sans-serif;
-      background: black;
-      display: flex;
-      justify-content: center;
-      direction: rtl;
-    }
+      .card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        width: 480px;
+        z-index: 10;
+        position: relative;
+      }
 
-    .card {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 15px;
-      width: 480px;
-    }
+      video {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 15px;
+      }
 
-    video {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
+      .info-box {
+        background: #f9fafb;
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        margin-top: 10px;
+        font-size: 15px;
+      }
 
-    .info-box {
-      background: #f9fafb;
-      padding: 10px 15px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      margin-top: 10px;
-      font-size: 15px;
-    }
+      .label {
+        font-weight: bold;
+        color: #374151;
+      }
 
-    .label {
-      font-weight: bold;
-      color: #374151;
-    }
+      .value {
+        color: #111827;
+      }
 
-    .value {
-      color: #111827;
-    }
-  </style>
+      /* افکت بارش قلب DOM */
+      .heart-drop {
+        position: fixed;
+        top: -20px;
+        font-size: 22px;
+        color: red;
+        animation: fall linear forwards;
+        z-index: 1;
+        pointer-events: none;
+      }
 
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet" />
-</head>
+      @keyframes fall {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
 
-<body>
-  <div class="card">
-    <video id="vid" controls 
-      poster="https://fakhravari.ir/CDN/Site/Image/Mohammad_Hussein_Fakhravari_1.jpg"
-      src="https://fakhravari.ir/CDN/Site/Video/Motivational_Clip_Fighting_Hardships_and_Challenges.mp4"></video>
+        to {
+          transform: translateY(120vh);
+          opacity: 0.7;
+        }
+      }
+    </style>
 
-    <div class="info-box">
-      <div>
-        <span class="label">رویداد: </span>
-        <span id="ev" class="value">—</span>
-      </div>
-      <div>
-        <span class="label">ثانیه: </span><span id="sec" class="value">0</span>
-      </div>
-      <div>
-        <span class="label">دقیقه:ثانیه: </span><span id="minsec" class="value">0:00</span>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="card">
+      <video id="vid" controls>
+        <source src="your-video.mp4" type="video/mp4" />
+      </video>
+
+      <div class="info-box">
+        <div>
+          <span class="label">رویداد: </span>
+          <span id="ev" class="value">—</span>
+        </div>
+        <div>
+          <span class="label">ثانیه: </span>
+          <span id="sec" class="value">0</span>
+        </div>
+        <div>
+          <span class="label">دقیقه:ثانیه: </span>
+          <span id="minsec" class="value">0:00</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    var v = document.getElementById("vid");
-    var ev = document.getElementById("ev");
-    var sec = document.getElementById("sec");
-    var minsec = document.getElementById("minsec");
+    <script>
+      var v = document.getElementById("vid");
+      var ev = document.getElementById("ev");
+      var sec = document.getElementById("sec");
+      var minsec = document.getElementById("minsec");
 
-    function format(t) {
-      var m = Math.floor(t / 60);
-      var s = Math.floor(t % 60)
-        .toString()
-        .padStart(2, "0");
-      return m + ":" + s;
-    }
+      function format(t) {
+        var m = Math.floor(t / 60);
+        var s = Math.floor(t % 60).toString().padStart(2, "0");
+        return m + ":" + s;
+      }
 
-    v.onplay = function () {
-      ev.textContent = "درحال پخش";
-    };
+      v.onplay = function () {
+        ev.textContent = "در حال پخش";
+      };
 
-    v.onpause = function () {
-      ev.textContent = "مکث";
-    };
-    v.onended = function () {
-      ev.textContent = "اتمام";
-    };
+      v.onpause = function () {
+        ev.textContent = "مکث";
+      };
 
-    v.ontimeupdate = function () {
-      ev.textContent = "درحال پخش";
-      sec.textContent = Math.floor(v.currentTime);
-      minsec.textContent = format(v.currentTime);
-    };
-  </script>
-</body>
+      v.onended = function () {
+        ev.textContent = "اتمام";
+      };
+
+      v.ontimeupdate = function () {
+        sec.textContent = Math.floor(v.currentTime);
+        minsec.textContent = format(v.currentTime);
+      };
+
+      // افکت بارش قلب
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart-drop";
+        heart.textContent = "❤️";
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+
+        let size = 18 + Math.random() * 12;
+        heart.style.fontSize = size + "px";
+
+        let duration = 1.5 + Math.random() * 2;
+        heart.style.animationDuration = duration + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), duration * 1000);
+      }
+
+      setInterval(createHeart, 150);
+    </script>
+  </body>
 </html>
